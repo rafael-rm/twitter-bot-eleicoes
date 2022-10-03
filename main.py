@@ -4,6 +4,7 @@ import dotenv
 import os
 from time import sleep
 
+
 # Carregando as variáveis de ambiente
 dotenv.load_dotenv(dotenv.find_dotenv())
 access_token_dot = os.getenv("ACESS_TOKEN")
@@ -29,8 +30,6 @@ try:
 except Exception as e:
     print("Erro durante a autenticação\n")
     print(e)
-
-
 
 # Função main
 def main():
@@ -60,11 +59,14 @@ def main():
 
             # Novo post a ser enviado
             post_enviar = f'📊 Resultados das eleições 2022\nDados atualizados em {data["dg"]} às {data["hg"]}h\n\n'
-            for i in range(0, 4): # 
+            for i in range(0, 4):
                 num_votos = data["cand"][i]["vap"]
                 num_votos = int(num_votos)
                 post_enviar = post_enviar + f'{data["cand"][i]["nm"]} - {num_votos:,} - {data["cand"][i]["pvap"]}%\n'
             post_enviar = post_enviar + f'\nUrnas apuradas: {data["psi"]}%'
+
+            num_urnas_ap = data["psi"]
+            num_urnas_ap = float(num_urnas_ap.replace(',', '.'))
 
             if (post_enviar == ultimo_post):
                 print("O ultimo post é igual ao post a ser enviado")
@@ -75,13 +77,21 @@ def main():
                 if(data['psi'] == '100,00'):
                     print('\n\nEleições finalizadas, todas as urnas apuradas. Aplicação encerrada.')
                     break
-                print('\nAguardando 5 minutos para o próximo post.')
+
+            if (num_urnas_ap >= 99):
+                print(f'\nAgurdando 20 minutos para o próximo post, pois o número de urnas apuradas é maior que 99% ({num_urnas_ap}%).')
+                sleep(1200) # 20 minutos caso as urnas estejam com 99% ou mais apuradas
+            elif (num_urnas_ap <= 96):
+                print(f'\nAgurdando 5 minuto para o próximo post, pois o número de urnas apuradas é menor que 96% ({num_urnas_ap}%).')
+                sleep(300) # 5 minutos caso o número de urnas apuradas seja menor que 96
+            else:
+                print(f'\nAgurdando 10 minutos para o próximo post, pois o número de urnas apuradas é entre 96% e 99% ({num_urnas_ap}%).')
+                sleep(600) # 10 minutos caso o número de urnas apuradas seja maior que 96 e menor que 99
 
         except Exception as e:
             print("Erro durante a execução do programa, tentando novamente em 30 segundos. \nErro: " + str(e))
             sleep(30) # Delay de 30 segundos para tentar novamente em caso de erro
         
-        sleep(300) # Delay de 5 minutos (300 segundos) para tentar enviar outro post
 
 if __name__ == "__main__":
     main()
