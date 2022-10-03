@@ -81,7 +81,7 @@ def main():
             print("Erro durante a execução do programa, tentando novamente em 30 segundos. \nErro: " + str(e))
             sleep(30) # Delay de 30 segundos para tentar novamente em caso de erro
         
-        sleep(300) # Delay de 5 minutos (300 segundos) para tentar novamente em caso de erro
+        sleep(300) # Delay de 5 minutos (300 segundos) para tentar enviar outro post
 
 if __name__ == "__main__":
     main()
