@@ -51,14 +51,21 @@ def main():
             # Transformando o JSON em um dicionário
             data = r.json()
 
+            # Verificar tamanho da lista
+            quantidade_candidatos = len(data['cand'])
+            if quantidade_candidatos < 5:
+                print('A quantidade de candidatos não coincide com o tamanho do looping para criação do post.')
+                print('Verifique o tamanho da lista de candidatos e o looping.')
+                break
+
             # Novo post a ser enviado
             post_enviar = f'📊 Resultados das eleições 2022\nDados atualizados em {data["dg"]} às {data["hg"]}h\n\n'
-            for i in range(0, 4):
+            for i in range(0, 4): # 
                 num_votos = data["cand"][i]["vap"]
                 num_votos = int(num_votos)
                 post_enviar = post_enviar + f'{data["cand"][i]["nm"]} - {num_votos:,} - {data["cand"][i]["pvap"]}%\n'
-
             post_enviar = post_enviar + f'\nUrnas apuradas: {data["psi"]}%'
+
             if (post_enviar == ultimo_post):
                 print("O ultimo post é igual ao post a ser enviado")
             else:
