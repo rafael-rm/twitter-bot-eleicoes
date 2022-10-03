@@ -11,7 +11,6 @@ access_token_dot = os.getenv("ACESS_TOKEN")
 access_token_secret_dot = os.getenv("ACESS_TOKEN_SECRET")
 consumer_key_dot = os.getenv("CONSUMER_KEY")
 consumer_secret_dot = os.getenv("CONSUMER_SECRET")
-webhook_url_dot = os.getenv("WEBHOOK_URL")
 
 access_token_dot = str(access_token_dot)
 access_token_secret_dot = str(access_token_secret_dot)
