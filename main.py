@@ -7,15 +7,10 @@ from time import sleep
 
 # Carregando as variáveis de ambiente
 dotenv.load_dotenv(dotenv.find_dotenv())
-access_token_dot = os.getenv("ACESS_TOKEN")
-access_token_secret_dot = os.getenv("ACESS_TOKEN_SECRET")
-consumer_key_dot = os.getenv("CONSUMER_KEY")
-consumer_secret_dot = os.getenv("CONSUMER_SECRET")
-
-access_token_dot = str(access_token_dot)
-access_token_secret_dot = str(access_token_secret_dot)
-consumer_key_dot = str(consumer_key_dot)
-consumer_secret_dot = str(consumer_secret_dot)
+access_token_dot = str(os.getenv("ACESS_TOKEN"))
+access_token_secret_dot = str(os.getenv("ACESS_TOKEN_SECRET"))
+consumer_key_dot = str(os.getenv("CONSUMER_KEY"))
+consumer_secret_dot = str(os.getenv("CONSUMER_SECRET"))
 
 # Autenticação
 auth = tweepy.OAuthHandler(consumer_key_dot, consumer_secret_dot)
@@ -49,16 +44,18 @@ def main():
             # Transformando o JSON em um dicionário
             data = r.json()
 
+            NUMERO_CANDIDATOS_EXIBIR = 2
+
             # Verificar tamanho da lista
             quantidade_candidatos = len(data['cand'])
-            if quantidade_candidatos < 5:
+            if quantidade_candidatos < NUMERO_CANDIDATOS_EXIBIR:
                 print('A quantidade de candidatos não coincide com o tamanho do looping para criação do post.')
                 print('Verifique o tamanho da lista de candidatos e o looping.')
                 break
 
             # Novo post a ser enviado
             post_enviar = f'📊 Resultados das eleições 2022\nDados atualizados em {data["dg"]} às {data["hg"]}h\n\n'
-            for i in range(0, 4):
+            for i in range(0, NUMERO_CANDIDATOS_EXIBIR):
                 num_votos = data["cand"][i]["vap"]
                 num_votos = int(num_votos)
                 post_enviar = post_enviar + f'{data["cand"][i]["nm"]} - {num_votos:,} - {data["cand"][i]["pvap"]}%\n'
