@@ -38,7 +38,7 @@ def main():
                 ultimo_post = ''
 
             # Requisição do JSON nos servidores da justiça eleitoral
-            url = 'https://resultados.tse.jus.br/oficial/ele2022/544/dados-simplificados/br/br-c0001-e000544-r.json'
+            url = 'https://resultados.tse.jus.br/oficial/ele2022/545/dados-simplificados/br/br-c0001-e000545-r.json'
             r = requests.get(url)
 
             # Transformando o JSON em um dicionário
