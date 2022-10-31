@@ -5,26 +5,24 @@ import os
 from time import sleep
 
 
-dotenv.load_dotenv(dotenv.find_dotenv())
-access_token_dot = str(os.getenv("ACESS_TOKEN"))
-access_token_secret_dot = str(os.getenv("ACESS_TOKEN_SECRET"))
-consumer_key_dot = str(os.getenv("CONSUMER_KEY"))
-consumer_secret_dot = str(os.getenv("CONSUMER_SECRET"))
-
-auth = tweepy.OAuthHandler(consumer_key_dot, consumer_secret_dot)
-auth.set_access_token(access_token_dot, access_token_secret_dot)
-api = tweepy.API(auth)
-
-try:
-    api.verify_credentials()
-    print("Autenticação bem sucedida")
-
-except Exception as e:
-    print("Erro durante a autenticação\n")
-    print(e)
-
-
 def main():
+    dotenv.load_dotenv(dotenv.find_dotenv())
+    access_token_dot = str(os.getenv("ACESS_TOKEN"))
+    access_token_secret_dot = str(os.getenv("ACESS_TOKEN_SECRET"))
+    consumer_key_dot = str(os.getenv("CONSUMER_KEY"))
+    consumer_secret_dot = str(os.getenv("CONSUMER_SECRET"))
+
+    auth = tweepy.OAuthHandler(consumer_key_dot, consumer_secret_dot)
+    auth.set_access_token(access_token_dot, access_token_secret_dot)
+    api = tweepy.API(auth)
+
+    try:
+        api.verify_credentials()
+        print("Autenticação bem sucedida")
+
+    except Exception as e:
+        print("Erro durante a autenticação\n")
+        print(e)
 
     while True:
 
