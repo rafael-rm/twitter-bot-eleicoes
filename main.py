@@ -68,15 +68,20 @@ def main():
                 if(data['psi'] == '100,00'):
                     print('\n\nEleições finalizadas, todas as urnas apuradas. Aplicação encerrada.')
                     break
-
-            if (num_urnas_ap >= 99):
-                print(f'Agurdando 20 minutos para o próximo post, pois o número de urnas apuradas é maior que 99% ({num_urnas_ap}%).')
+            if (num_urnas_ap >= 99.9):
+                print(f'Agurdando 60 minutos para o próximo post, pois o número de urnas apuradas é maior ou igual 99.9% ({num_urnas_ap}%).')
+                sleep(3600)
+            elif (num_urnas_ap >= 99.5):
+                print(f'Agurdando 30 minutos para o próximo post, pois o número de urnas apuradas é maior ou igual a 99.5% ({num_urnas_ap}%).')
+                sleep(1800)
+            elif (num_urnas_ap >= 99):
+                print(f'Agurdando 20 minutos para o próximo post, pois o número de urnas apuradas é maior ou igual 99% ({num_urnas_ap}%).')
                 sleep(1200)
             elif (num_urnas_ap <= 96):
-                print(f'Agurdando 5 minuto para o próximo post, pois o número de urnas apuradas é menor que 96% ({num_urnas_ap}%).')
+                print(f'Agurdando 5 minuto para o próximo post, pois o número de urnas apuradas é menor ou igual 96% ({num_urnas_ap}%).')
                 sleep(300)
             else:
-                print(f'Agurdando 10 minutos para o próximo post, pois o número de urnas apuradas é entre 96% e 99% ({num_urnas_ap}%).')
+                print(f'Agurdando 10 minutos para o próximo post, pois o número de urnas apuradas esta entre 96% e 99% ({num_urnas_ap}%).')
                 sleep(600)
 
         except Exception as e:
