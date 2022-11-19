@@ -5,15 +5,18 @@ import os
 from time import sleep
 
 
+NUMERO_CANDIDATOS_EXIBIR = 2
+
+
 def main():
     dotenv.load_dotenv(dotenv.find_dotenv())
-    access_token_dot = str(os.getenv("ACESS_TOKEN"))
-    access_token_secret_dot = str(os.getenv("ACESS_TOKEN_SECRET"))
-    consumer_key_dot = str(os.getenv("CONSUMER_KEY"))
-    consumer_secret_dot = str(os.getenv("CONSUMER_SECRET"))
+    access_token = str(os.getenv("ACESS_TOKEN"))
+    access_token_secret = str(os.getenv("ACESS_TOKEN_SECRET"))
+    api_key = str(os.getenv("API_KEY"))
+    api_key_secret = str(os.getenv("API_KEY_SECRET"))
 
-    auth = tweepy.OAuthHandler(consumer_key_dot, consumer_secret_dot)
-    auth.set_access_token(access_token_dot, access_token_secret_dot)
+    auth = tweepy.OAuthHandler(api_key, api_key_secret)
+    auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
 
     try:
@@ -37,8 +40,6 @@ def main():
             r = requests.get(url)
 
             data = r.json()
-
-            NUMERO_CANDIDATOS_EXIBIR = 2
 
             quantidade_candidatos = len(data['cand'])
             if quantidade_candidatos < NUMERO_CANDIDATOS_EXIBIR:
