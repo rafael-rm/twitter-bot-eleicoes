@@ -31,7 +31,7 @@ Para obter estas chaves é necessário criar uma
 [conta de desenvolvedor](https://developer.twitter.com/en/portal/dashboard) no twitter
 
 **Observação:** É necessário 
-[solicitar acesso elevado](https://developer.twitter.com/en/portal/products/elevated) a API.
+[solicitar acesso elevado](https://developer.twitter.com/en/portal/products/elevated) a API do twitter.
 ## FAQ
 
 #### 1- Onde posso obter a API contendo a apuração de votos do TSE?
